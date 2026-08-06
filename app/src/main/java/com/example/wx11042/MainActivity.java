@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etCategory;
     EditText etDate;
     Button btnAddExpanse;
+    private HelperDB dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         etCategory = findViewById(R.id.editTextCatagory);
         etDate = findViewById(R.id.editTextDate);
         btnAddExpanse = findViewById(R.id.button);
+        dbHelper = new HelperDB(this);
 
         btnAddExpanse.setOnClickListener(v -> addExpanse());
     }
@@ -35,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
         String date = etDate.getText().toString();
 
         // Create a new Expanse object
-        Expanse newExpanse = new Expanse(amount, description, category, date);
+        Expense newExpense = new Expense(0, amount, description, category, date);
         // Insert the new Expanse into the database
+        long id = dbHelper.addExpanse(newExpense);
     }
 
 

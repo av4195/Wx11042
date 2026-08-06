@@ -1,13 +1,13 @@
 package com.example.wx11042;
 
-public class Expanse {
-    public String KEY_ID = "id";
+public class Expense {
+    public long KEY_ID;
     public String description = "description";
     public String amount = "amount";
     public String category = "category";
     public String date = "date";
 
-    public Expanse(String description, String amount, String category, String date) {
+    public Expense(long keyid, String description, String amount, String category, String date) {
         this.description = description;
         this.amount = amount;
         this.category = category;
@@ -30,7 +30,7 @@ public class Expanse {
         return date;
     }
 
-    public String getId() {
+    public long getId() {
         return KEY_ID;
     }
 
@@ -52,7 +52,7 @@ public class Expanse {
         this.date = date;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.KEY_ID = id;
     }
 }
