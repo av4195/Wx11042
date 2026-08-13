@@ -8,6 +8,7 @@ public class Expense {
     public String date = "date";
 
     public Expense(long keyid, String description, String amount, String category, String date) {
+        this.KEY_ID = keyid;
         this.description = description;
         this.amount = amount;
         this.category = category;

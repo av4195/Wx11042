@@ -60,6 +60,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExpanses"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/item_expanse"

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
+    android:background="#4E009688"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +14,8 @@
         android:gravity="center"
         android:text="description"
         android:textColor="#2196F3"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvExpanseAmount"
