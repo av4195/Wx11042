@@ -59,13 +59,53 @@ public class HelperDB extends SQLiteOpenHelper {
         return id;
     }
 
-    public List<Expense> getAllExpenses() {
-        List<Expense> expenseList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + Expanses.TABLE_NAME + " ORDER BY " + Expanses.DATE + " DESC";
+    public void deleteExpanse(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Expanses.TABLE_NAME, KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
+        db.close();
+    }
 
-        Log.d(HelperDB.class.getName(), "Executing: " + selectQuery);
+    public int updateExpanse(Expense expense) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DESCRIPTION, expense.getDescription());
+        values.put(Expanses.AMOUNT, expense.getAmount());
+        values.put(Expanses.CATEGORY, expense.getCategory());
+        values.put(Expanses.DATE, expense.getDate());
+
+        int result = db.update(Expanses.TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(expense.getId())});
+        db.close();
+        return result;
+    }
+
+
+
+    public List<Expense> getAllExpenses() {
+        return filterExpenses(null, null);
+    }
+
+    public List<Expense> filterExpenses(String description, String maxAmount) {
+        List<Expense> expenseList = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM " + Expanses.TABLE_NAME + " WHERE 1=1");
+        List<String> args = new ArrayList<>();
+
+        if (description != null && !description.isEmpty()) {
+            query.append(" AND ").append(DESCRIPTION).append(" LIKE ?");
+            args.add("%" + description + "%");
+        }
+
+        if (maxAmount != null && !maxAmount.isEmpty()) {
+            query.append(" AND ").append(Expanses.AMOUNT).append(" <= ?");
+            args.add(maxAmount);
+        }
+
+        query.append(" ORDER BY ").append(Expanses.DATE).append(" DESC");
+
+        Log.d(HelperDB.class.getName(), "Executing: " + query + " with args: " + args);
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery(query.toString(), args.toArray(new String[0]));
 
         if (cursor.moveToFirst()) {
             do {

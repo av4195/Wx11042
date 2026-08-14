@@ -44,10 +44,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.tvCategory.setText(expense.getCategory());
         holder.tvDate.setText(expense.getDate());
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnLongClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(expense);
             }
+            return true;
         });
     }
 
