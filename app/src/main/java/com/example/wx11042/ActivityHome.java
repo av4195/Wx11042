@@ -3,6 +3,8 @@ package com.example.wx11042;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,14 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ActivityHome extends AppCompatActivity {
 
     private RecyclerView rvExpanses;
     private ExpenseAdapter adapter;
     private List<Expense> expenseList;
     private AlertDialog.Builder adb;
+    AlertDialog.Builder adb2;
+    LinearLayout myDialog;
+    EditText etd, eta, etc, etDate;
 
 
+    /**
+     *this method is for
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,23 @@ public class ActivityHome extends AppCompatActivity {
             adb.setPositiveButton("Edit" , new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
+                    AlertDialog.Builder adb2;
+                    myDialog =(LinearLayout) getLayoutInflater().inflate(R.layout.dialog_expence, null);
+                    etd = myDialog.findViewById(R.id.etd);
+                    eta = myDialog.findViewById(R.id.eta);
+                    etc = myDialog.findViewById(R.id.etc);
+                    etDate = myDialog.findViewById(R.id.etDate);
+
+                    adb2= new AlertDialog.Builder(ActivityHome.this);
+                    adb2.setView(myDialog);
+                    adb2.setTitle("Edit Expanse");
+                    adb2.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
 
                 }
             });

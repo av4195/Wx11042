@@ -6,6 +6,14 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author Adi Waizman
+ * @version 1.0
+ * @since 01/08/2026
+ *
+ * this class is the main activity of the
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     EditText etAmount;
