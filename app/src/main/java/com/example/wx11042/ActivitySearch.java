@@ -1,10 +1,13 @@
 package com.example.wx11042;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +28,15 @@ public class ActivitySearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         etDescription = findViewById(R.id.et_description);
         etMaxAmount = findViewById(R.id.etFilterAmount);
         btnSearch = findViewById(R.id.btnSearch);
         rvResults = findViewById(R.id.rvFilterdExpanses);
 
-        dbHelper = new HelperDB(this);
+//        dbHelper = new HelperDB(this);
         resultsList = new ArrayList<>();
         adapter = new ExpenseAdapter(resultsList);
 
@@ -46,5 +52,18 @@ public class ActivitySearch extends AppCompatActivity {
             resultsList.addAll(filtered);
             adapter.notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (MenuNavigation.NavigateOnItemSelected(item, this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 }

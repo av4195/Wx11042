@@ -83,7 +83,7 @@ public class HelperDB extends SQLiteOpenHelper {
 
 
     public List<Expense> getAllExpenses() {
-        return filterExpenses(null, null);
+        return filterExpenses(null, null); // reads from database
     }
 
     public List<Expense> filterExpenses(String description, String maxAmount) {

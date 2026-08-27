@@ -4,19 +4,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,6 +40,10 @@ public class ActivityHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         rvExpanses = findViewById(R.id.rvExpanses);
         rvExpanses.setLayoutManager(new LinearLayoutManager(this));
 
@@ -49,25 +51,25 @@ public class ActivityHome extends AppCompatActivity {
         expenseList = expansesList.getExpanses();
 
         dbHelper = new HelperDB(this);
-//        if (expenseList.isEmpty()) {
-//            // Add some dummy data using Expense class if list is empty
-//            expenseList.add(new Expense(1L, "Grocery shopping", "50.00", "Food", "2026-08-10"));
-//            expenseList.add(new Expense(2L, "Gas station", "40.00", "Transport", "2026-08-09"));
-//            expenseList.add(new Expense(3L, "Netflix subscription", "15.00", "Entertainment", "2026-08-01"));
-//        }
-        expansesList.getExpanses().clear();
-        expansesList.getExpanses().addAll(dbHelper.getAllExpenses());
         
         adapter = new ExpenseAdapter(expenseList);
         adapter.setOnItemClickListener(expense -> {
             setupItemAlertDialog(expense);
         });
         rvExpanses.setAdapter(adapter);
+
+        findViewById(R.id.btn_add_expense).setOnClickListener(v -> {
+            Intent intent = new Intent(ActivityHome.this, AddExpenseActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        List<Expense> updatedList = dbHelper.getAllExpenses();
+        expenseList.clear();
+        expenseList.addAll(updatedList);
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
@@ -81,7 +83,7 @@ public class ActivityHome extends AppCompatActivity {
         adb.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(ActivityHome.this, MainActivity.class);
+                Intent intent = new Intent(ActivityHome.this, AddExpenseActivity.class);
                 intent.putExtra("id", expense.getId());
                 startActivity(intent);
             }
@@ -101,5 +103,18 @@ public class ActivityHome extends AppCompatActivity {
 
         AlertDialog ad1 = adb.create();
         ad1.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (MenuNavigation.NavigateOnItemSelected(item, this))
+            return true;
+        return super.onOptionsItemSelected(item);
     }
 }

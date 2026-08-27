@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ActivitySearch">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <EditText
         style="@style/ThemeOverlay.Material3.TextInputEditText"
         android:id="@+id/et_description"
@@ -17,10 +28,10 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Search by description"
+        android:hint="@string/hint_search_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         style="@style/ThemeOverlay.Material3.TextInputEditText"
@@ -30,7 +41,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="number"
-        android:hint="Max amount"
+        android:hint="@string/hint_max_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_description" />
@@ -40,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="@string/menu_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etFilterAmount" />
