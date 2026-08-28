@@ -15,7 +15,7 @@
             android:name=".ActivityHome"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".AddExpenseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,9 @@
             android:name=".ActivitySearch"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CreditsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

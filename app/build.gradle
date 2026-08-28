@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.wx11042'
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "com.example.wx11042"
         minSdk 24

@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Wx11042</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_add">Add Expense</string>
+    <string name="menu_search">Search</string>
+    <string name="title_home">My Expenses</string>
+    <string name="btn_add">Add</string>
+    <string name="hint_amount">Amount</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_category">Category</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_search_desc">Search by description</string>
+    <string name="hint_max_amount">Max amount</string>
+    <string name="menu_credits">Credits</string>
+    <string name="credits_text">Albert ya melech</string>
 </resources>
